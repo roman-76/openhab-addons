@@ -479,6 +479,15 @@ public class WemoHandler extends AbstractWemoHandler implements UpnpIOParticipan
                 } catch (Exception e) {
                 }
             }
+            if (port == null) {
+                int defaultPort = descriptorURL.getPort();
+                if(defaultPort == -1) {
+                    defaultPort = descriptorURL.getDefaultPort();
+                }
+                if (defaultPort != -1) {
+                    port = String.valueOf(defaultPort);
+                }
+        }
             wemoURL = "http://" + host + ":" + port + "/upnp/control/" + actionService + "1";
             return wemoURL;
         }
